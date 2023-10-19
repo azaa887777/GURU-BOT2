@@ -1,33 +1,37 @@
-import fetch from 'node-fetch';
-
+import fetch from 'node-fetch'
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-  const name = conn.getName(m.sender);
-  if (!text) {
-    throw `Hi *${name}*, do you want to talk? Respond with *${usedPrefix + command}* (your message)\n\n📌 Example: *${usedPrefix + command}* Hi bot`;
-  }
+if (!text) throw `اكتب نصا للتحدث معي\nمثال: ${usedPrefix + command} Hola bot*`
+await displayLoadingScreen(conn, m.chat, text)
+}
+handler.help = ['simsimi']
+handler.tags = ['General']
+handler.command = ['bot', 'simi', 'simsimi'] 
+export default handler
+
+async function displayLoadingScreen(conn, from, text) {
+    const loadingStages = [];
+    let currentStage = "";
   
-  m.react('🗣️');
+    for (let i = 0; i < text.length; i++) {
+        currentStage += text.charAt(i);
+        loadingStages.push(currentStage);
+    }
   
-  const options = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `text=${encodeURIComponent(text)}&lc=en&key=`
-  };
-
-  const res = await fetch('https://api.simsimi.vn/v1/simtalk', options);
-  const json = await res.json();
+    try {
+        const { key } = await conn.sendMessage(from, { text: loadingStages[0] });
   
-  if (json.status === '200') {
-    const reply = json.message;
-    m.reply(reply);
-  } else {
-    throw json;
-  }
-};
-
-handler.help = ['bot'];
-handler.tags = ['fun'];
-handler.command = ['bot', 'alexa'];
-
-export default handler;
-
+        for (let i = 1; i < loadingStages.length; i++) {
+            await conn.relayMessage(from, {
+                protocolMessage: {
+                    key: key,
+                    type: 14,
+                    editedMessage: {
+                        conversation: loadingStages[i]
+                    }
+                }
+            }, {});
+        }
+    } catch (error) {
+        console.error('Error displaying loading screen:', error);
+    }
+}
