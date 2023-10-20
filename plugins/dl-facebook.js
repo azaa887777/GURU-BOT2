@@ -1,4 +1,5 @@
-import fg from 'api-dylux';
+import fg from 'api-dylux'
+import displayLoadingScreen from '../lib/loading.js';
 
 const handler = async (m, { conn, args, usedPrefix, command }) => {
   if (!args[0]) {
@@ -11,6 +12,7 @@ const handler = async (m, { conn, args, usedPrefix, command }) => {
   }
 
   m.react(rwait);
+  await displayLoadingScreen(conn, m.chat)
 
   try {
     const result = await fg.fbdl(args[0]);
