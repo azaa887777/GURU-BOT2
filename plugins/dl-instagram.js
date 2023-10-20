@@ -1,8 +1,9 @@
+import displayLoadingScreen from '../lib/loading.js'
 import fetch from 'node-fetch';
 
 let handler = async (m, { conn, usedPrefix, args, command, text }) => {
   if (!text) throw `LINK?`;
-  m.reply(wait);
+  await displayLoadingScreen(conn, m.chat)
 
   let res;
   try {
