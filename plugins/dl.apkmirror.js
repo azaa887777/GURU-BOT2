@@ -21,7 +21,7 @@ let handler = async (m, {
 
         if (feature == "search") {
             if (!inputs) return m.reply("Input query link\nExample: .apkmirror search|vpn")
-            await m.reply(wait)
+            await displayLoadingScreen(conn, m.chat)
             try {
                 let res = await searchApkmirror(inputs)
                 let teks = res.map((item, index) => {
