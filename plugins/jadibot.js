@@ -1,172 +1,34 @@
-const { MessageType, useMultiFileAuthState, DisconnectReason, Browsers } = await import("@adiwajshing/baileys")
-import qrcode from "qrcode"
-import fs from "fs"
-import P from 'pino';
-import * as ws from 'ws';
-const {child , spawn, exec} = await import('child_process');
-const { CONNECTING } = ws
-import { makeWaSocket, protoType, serialize } from '../lib/simple.js';
+/*
 
-let check1 = "NjBhZGVmZWI4N2M2"
-let check2 = "ZThkMmNkOGVlMDFmZD"
-let check3 = "UzYTI1MTQgIGluZ"
-let check4 = "m8tZG9uYXIuanMK"
-let check5 = "NzZjM2ZmMzU2MTEyMzM3OTczOWU5ZmFmMDZjYzUzO"
-let check6 = "DcgIF9hdXRvcmVzcG9uZGVyLmpzCjU5Yzc0ZjFjNmEz"
-let check8 = "NjNmYmJjYzA1YmFiY2MzZGU4MGRlICBpbmZvLWJvdC5qcwo"
-//
-let crm1 = "Y2QgcGx1Z2lucy"
-let crm2 = "A7IG1kNXN1b"
-let crm3 = "SBpbmZvLWRvbmFyLmpz"
-let crm4 = "IF9hdXRvcmVzcG9uZGVyLmpzIGluZm8tYm90Lmpz"
-let drm1 = "CkphZGlib3QsIEhlY2hv"
-let drm2 = "IHBvciBAQWlkZW5fTm90TG9naWM"
-let rtx= `${author}
+⚠ PROHIBIDO EDITAR ⚠ -- ⚠ PROHIBIDO EDITAR ⚠ -- ⚠ PROHIBIDO EDITAR ⚠
 
-*Scan this QR code to become a Bot (SubBot), you can use other devices to scan* *Steps to scan:* *1.- Tap the three dots in the top right corner on your WhatsApp homepage* *2.- Tap WhatsApp web or connected device* *3.- Scan this QR code* *QR code is valid for 60 seconds!!* *You can send the given ID to the bot privately to reconnect the bot without having to scan the code again, this code starts with /serbot.* *Remember to leave the group when you become a bot* This process is 100% Safe.`
+El codigo de este archivo fue realizado por:
+- ReyEndymion (https://github.com/ReyEndymion)
 
-if (global.conns instanceof Array) console.log()
-else global.conns = []
+⚠ PROHIBIDO EDITAR ⚠ -- ⚠ PROHIBIDO EDITAR ⚠ -- ⚠ PROHIBIDO EDITAR ⚠
 
-let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
-  let parentw = conn
-  if (conn.user.jid !== global.conn.user.jid) return parentw.reply(m.chat, 'Perintah ini hanya dapat digunakan di bot utama! wa.me/' + global.conn.user.jid.split`@`[0], m)
-  const comb = Buffer.from(crm1 + crm2 + crm3 + crm4, "base64")
-  exec(comb.toString("utf-8"), async (err, stdout, stderr) => {
-    const buffdr = Buffer.from(check1 + check2 + check3 + check4 + check5 + check6 + check8 + "=", 'base64')
-    const drmer = Buffer.from(drm1 + drm2, 'base64')
+*/
 
-    async function jddt() {
-      function randomString(length) {
-        var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('');
-
-        if (! length) {
-            length = Math.floor(Math.random() * chars.length);
-        }
-
-        var str = '';
-        for (var i = 0; i < length; i++) {
-            str += chars[Math.floor(Math.random() * chars.length)];
-        }
-        return str;
-      }
-
-      let uniqid = randomString(10)
-      if (!fs.existsSync("./jadibot/"+ uniqid)){
-          fs.mkdirSync("./jadibot/"+ uniqid, { recursive: true });
-      }
-      args[0] ? fs.writeFileSync("./jadibot/" + uniqid + "/creds.json", JSON.stringify(JSON.parse(Buffer.from(args[0], "base64").toString("utf-8")), null, '\t')) : ""
-      const { state, saveState, saveCreds } = await useMultiFileAuthState("./jadibot/" + uniqid)
-
-      const connectionOptions = {
-        printQRInTerminal: true,
-        auth: state,
-        logger: P({ level: 'silent'}),
-        browser: ['Chrome (Linux)', '', ''],
-      }
-
-      let conn = makeWaSocket(connectionOptions)
-      conn.isInit = false
-      let isInit = true
-
-      async function connectionUpdate(update) {
-        const { connection, lastDisconnect, isNewLogin, qr } = update
-        if (isNewLogin) conn.isInit = true
-        if (qr) parentw.sendMessage(m.chat, {image: await qrcode.toBuffer(qr, { scale: 8 }) , caption : rtx + drmer.toString("utf-8")}, { quoted: m })
-        const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode
-        console.log(code)
-        if (code && code !== DisconnectReason.loggedOut && conn?.ws.readyState !== CONNECTING) {
-          let i = global.conns.indexOf(conn)
-          if (i < 0) return console.log(await creloadHandler(true).catch(console.error))
-          delete global.conns[i]
-          global.conns.splice(i, 1)
-          if (code !== DisconnectReason.connectionClosed){ parentw.sendMessage(m.chat, {text : "Koneksi ditutup, akan mencoba untuk terhubung kembali secara otomatis..."}, { quoted: m })
-          console.log(await creloadHandler(true).catch(console.error))}
-          else {
-              parentw.sendMessage(m.chat, {text : "Koneksi ditutup, Anda harus terhubung kembali secara manual..."}, { quoted: m })
-          }
-        }
-        if (global.db.data == null) loadDatabase()
-        if (connection == 'open') {
-        conn.isInit = true
-        global.conns.push(conn)
-        await parentw.sendMessage(m.chat, {text : args[0] ? "Berhasil terhubung ✅" : "*Berhasil terhubung✅* Dalam beberapa detik, kami akan mengirimkan ID yang harus Anda gunakan untuk terhubung kembali... Kirimkan ini ke bot secara pribadi ketika bot terputus."}, { quoted: m })
-        await sleep(5000)
-        if (!args[0]) parentw.sendMessage(m.chat, {text : usedPrefix + command + " " + Buffer.from(fs.readFileSync("./jadibot/" + uniqid + "/creds.json"), "utf-8").toString("base64")}, { quoted: m })
-        }
-      }
-
-      setInterval(async () => {
-        if (!conn.user) {
-          try { conn.ws.close() } catch { }
-          conn.ev.removeAllListeners()
-          let i = global.conns.indexOf(conn)
-          if (i < 0) return
-          delete global.conns[i]
-          global.conns.splice(i, 1)
-        }}, 60000)
-
-      let handler = await import('../handler.js')
-      let creloadHandler = async function (restatConn) {
-        try {
-          const Handler = await import(`../handler.js?update=${Date.now()}`).catch(console.error)
-          if (Object.keys(Handler || {}).length) handler = Handler
-        } catch (e) {
-          console.error(e)
-        }
-        if (restatConn) {
-          try { conn.ws.close() } catch { }
-          conn.ev.removeAllListeners()
-          conn = makeWaSocket(connectionOptions)
-          isInit = true
-        }
-        if (!isInit) {
-          conn.ev.off('messages.upsert', conn.handler)
-          conn.ev.off('group-participants.update', conn.participantsUpdate)
-          conn.ev.off('groups.update', conn.groupsUpdate)
-          conn.ev.off('message.delete', conn.onDelete)
-          conn.ev.off('connection.update', conn.connectionUpdate)
-          conn.ev.off('creds.update', conn.credsUpdate)
-        }
-
-        conn.welcome = '*┊↳🔰┊ Selamat datang di grup!!*\n*━━━━━━━━━━━━━━━━*\n\n👤 *• Nama:* @user\n📝 *• Deskripsi:* \n\n• ❝@desc❞\n\n🥀 *Nikmati waktu Anda di grup ini.*'
-        conn.bye = '*★════◈◈◈════★*\n┃• Selamat tinggal👋 *@user*\n┃• Pergilah dengan damai -*\n*★════◈◈◈════★*'
-        conn.spromote = '*┊↳🔰┊ @user Sekarang adalah Admin 👻*'
-        conn.sdemote = '*┊↳🔰┊ @user Tidak lagi menjadi Admin 〽️*'
-        conn.sDesc = '*┊↳🔰┊ Deskripsi grup telah diubah*\n\n*Deskripsi baru:* @desc'
-        conn.sSubject = '*┊↳🔰┊ Nama grup telah diubah*\n*Nama Baru:* @subject'
-        conn.sIcon = '*┊↳🔰┊ Gambar grup diperbarui!!*'
-        conn.sRevoke = '*┊↳🔰┊ Link grup telah diperbarui*\n*Link Baru:* @revoke'
-
-        conn.handler = handler.handler.bind(conn)
-        conn.participantsUpdate = handler.participantsUpdate.bind(conn)
-        conn.groupsUpdate = handler.groupsUpdate.bind(conn)
-        conn.onDelete = handler.deleteUpdate.bind(conn)
-        conn.connectionUpdate = connectionUpdate.bind(conn)
-        conn.credsUpdate = saveCreds.bind(conn, true)
-
-        conn.ev.on('messages.upsert', conn.handler)
-        conn.ev.on('group-participants.update', conn.participantsUpdate)
-        conn.ev.on('groups.update', conn.groupsUpdate)
-        conn.ev.on('message.delete', conn.onDelete)
-        conn.ev.on('connection.update', conn.connectionUpdate)
-        conn.ev.on('creds.update', conn.credsUpdate)
-        isInit = false
-        return true
-      }
-      creloadHandler(false)
+function _0x7d77(_0x3884d3, _0x297cf0) {
+  const _0x5346a4=_0x5346(); return _0x7d77=function(_0x7d7709, _0x34044c) {
+    _0x7d7709=_0x7d7709-0x1b0; const _0x2ead54=_0x5346a4[_0x7d7709]; return _0x2ead54;
+  }, _0x7d77(_0x3884d3, _0x297cf0);
+} const _0xe8344c=_0x7d77; function _0x5346() {
+  const _0x2ebb89=['error', 'help', '24jWtTwj', 'command', '*[❗]\x20Adiós\x20Bot,\x20haz\x20dejado\x20de\x20ser\x20un\x20Bot*', 'fromMe', 'split', '6858gzqVbM', 'La\x20carpeta\x20o\x20archivo\x20de\x20sesion\x20no\x20existen\x20', 'jid', '50TGXqLs', '*[❗]\x20Use\x20este\x20comando\x20directamente\x20en\x20el\x20numero\x20del\x20Bot\x20principal*', '443584xjTIxm', 'deletebot', '79052UoJUol', '3857359pKoOWl', 'sendMessage', './jadibts/', '28btHpPP', '190emRVsT', '42Qwxenc', '1893708Sdldqv', 'jadibot', 'conn', '1133253ZlNWaF', 'chat', 'mentionedJid', '4686144IHEtEb', 'user']; _0x5346=function() {
+    return _0x2ebb89;
+  }; return _0x5346();
+}(function(_0x384d26, _0x49a7ad) {
+  const _0x2aada2=_0x7d77; const _0x57b362=_0x384d26(); while ([]) {
+    try {
+      const _0x2d3954=parseInt(_0x2aada2(0x1c8))/0x1*(parseInt(_0x2aada2(0x1bd))/0x2)+parseInt(_0x2aada2(0x1cb))/0x3+-parseInt(_0x2aada2(0x1c4))/0x4*(parseInt(_0x2aada2(0x1c9))/0x5)+parseInt(_0x2aada2(0x1b4))/0x6+parseInt(_0x2aada2(0x1ca))/0x7*(-parseInt(_0x2aada2(0x1c2))/0x8)+-parseInt(_0x2aada2(0x1b1))/0x9*(parseInt(_0x2aada2(0x1c0))/0xa)+parseInt(_0x2aada2(0x1c5))/0xb*(parseInt(_0x2aada2(0x1b8))/0xc); if (_0x2d3954===_0x49a7ad) break; else _0x57b362['push'](_0x57b362['shift']());
+    } catch (_0x2f0510) {
+      _0x57b362['push'](_0x57b362['shift']());
     }
-    jddt()
-  })
-}
-handler.help = ['jadibot']
-handler.tags = ['jadibot']
-handler.command = /^(jadibot)/i
-
-handler.limit = false
-
-export default handler
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+  }
+}(_0x5346, 0x792d7)); import {readdirSync, statSync, unlinkSync, existsSync, readFileSync, watch, rmSync, promises as _0x3872c8} from 'fs'; import _0x2ef42a, {join} from 'path'; const handler=async (_0x25b602, {conn: _0x191f72}, _0x136d85)=>{
+  const _0x58c72f=_0x7d77; const _0x29ea36=_0x191f72; const _0x109b85=_0x25b602[_0x58c72f(0x1b3)]&&_0x25b602[_0x58c72f(0x1b3)][0x0]?_0x25b602[_0x58c72f(0x1b3)][0x0]:_0x25b602[_0x58c72f(0x1bb)]?_0x191f72[_0x58c72f(0x1b5)]['jid']:_0x25b602['sender']; const _0x2ff9d9=''+_0x109b85[_0x58c72f(0x1bc)]`@`[0x0]; if (global[_0x58c72f(0x1b0)][_0x58c72f(0x1b5)][_0x58c72f(0x1bf)]!==_0x191f72['user'][_0x58c72f(0x1bf)]) return _0x191f72[_0x58c72f(0x1c6)](_0x25b602[_0x58c72f(0x1b2)], {'text': _0x58c72f(0x1c1)}, {'quoted': _0x25b602}); else await _0x191f72['sendMessage'](_0x25b602['chat'], {'text': _0x58c72f(0x1ba)}, {'quoted': _0x25b602}); try {
+    _0x3872c8['rmdir'](_0x58c72f(0x1c7)+_0x2ff9d9, {'recursive': !![], 'force': !![]}), await _0x191f72[_0x58c72f(0x1c6)](_0x25b602[_0x58c72f(0x1b2)], {'text': '*[❗]\x20Todos\x20los\x20archivos\x20de\x20session\x20fueron\x20eliminados*'}, {'quoted': _0x25b602});
+  } catch (_0xe7bf34) {
+    console[_0x58c72f(0x1b6)](_0x58c72f(0x1be), _0xe7bf34);
+  }
+}; handler[_0xe8344c(0x1b7)]=[_0xe8344c(0x1c3)], handler['tags']=[_0xe8344c(0x1cc)], handler[_0xe8344c(0x1b9)]=/^(deletebot|aa2)$/i, handler['private']=!![], handler['fail']=null; export default handler;
