@@ -2,7 +2,7 @@
 const handler = async (m, {conn, usedPrefix, command}) => {
   const q = m.quoted ? m.quoted : m;
   const mime = (q || q.msg).mimetype || q.mediaType || '';
-  if (!/video|audio/.test(mime)) throw `*ارسال الامر متبوع بالفيديو*`;
+  if (!/video|audio/.test(mime)) throw `*ارسال الامر متبوع بالفيديو او اي ملف صوتي*`;
   const media = await q.download();
   if (!media) throw 'أنا آسف، حدث خطأ أثناء تنزيل الفيديو، يرجى المحاولة مرة أخرى*';
   const audio = await toAudio(media, 'mp4');
