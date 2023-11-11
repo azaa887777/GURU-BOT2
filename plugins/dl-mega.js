@@ -1,6 +1,6 @@
 import { File } from "megajs";
 import path from "path";
-
+import displayLoadingScreen from '../lib/loading.js'
 let handler = async (m, { conn, args, usedPrefix, text, command }) => {
     try {
         if (!text) return m.reply(`${usedPrefix + command} https://mega.nz/file/ovJTHaQZ#yAbkrvQgykcH_NDKQ8eIc0zvsN7jonBbHZ_HTQL6lZ8`);
