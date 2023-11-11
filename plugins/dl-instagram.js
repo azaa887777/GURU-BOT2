@@ -6,6 +6,7 @@ let handler = async (m, { conn, usedPrefix, args, command, text }) => {
 
   let res;
   try {
+    let gurubot = 'https://www.guruapi.tech/api'
     res = await fetch(`${gurubot}/igdlv1?url=${text}`);
   } catch (error) {
     throw `An error occurred: ${error.message}`;
