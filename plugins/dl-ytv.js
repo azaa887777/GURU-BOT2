@@ -34,7 +34,7 @@ const handler = async (m, {conn, args, usedPrefix, command}) => {
       }
     }
   }
-  const { key } = await m.reply(`*_⏳Sᴇ ᴇsᴛᴀ ᴘʀᴏᴄᴇsᴀɴᴅᴏ Sᴜ ᴠɪᴅᴇᴏ...⏳_*\n\n*◉ Sɪ Sᴜ ᴠɪᴅᴇᴏ ɴᴏ ᴇs ᴇɴᴠɪᴀᴅᴏ, ᴘʀᴜᴇʙᴇ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ #playdoc ᴏ #play.2 ᴏ #ytmp4doc ◉*`);
+  const { key } = await m.reply(`*_⏳Wait your video is on process....⏳_*`);
   try {
     const formats = await bestFormat(youtubeLink, 'video');
     const buff = await getBuffer(formats.url);
@@ -70,8 +70,8 @@ const handler = async (m, {conn, args, usedPrefix, command}) => {
     console.log(ee2)
     try {
       const mediaa = await ytMp4(youtubeLink);
-      await conn.sendMessage(m.chat, {video: {url: mediaa.result}, fileName: `error.mp4`, caption: `_𝐓𝐡𝐞 𝐌𝐲𝐬𝐭𝐢𝐜 - 𝐁𝐨𝐭_`, thumbnail: mediaa.thumb, mimetype: 'video/mp4'}, {quoted: m});
-      await conn.sendMessage(m.chat, {text: '*[ ✔ ] Video descargado exitosamente.*', edit: key}, {quoted: m});
+      await conn.sendMessage(m.chat, {video: {url: mediaa.result}, fileName: `error.mp4`, caption: `©𝐌𝐎𝐇𝐂𝐈𝐍𝐄|ᴮᴼᵀ 𝐎𝐅𝐅𝐈𝐂𝐈𝐀𝐋`, thumbnail: mediaa.thumb, mimetype: 'video/mp4'}, {quoted: m});
+      await conn.sendMessage(m.chat, {text: '*[ ✔ ] DONE.*', edit: key}, {quoted: m});
       enviando = false
     } catch {
       try {
