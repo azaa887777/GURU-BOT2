@@ -1,8 +1,9 @@
 import fetch from 'node-fetch'
 let handler = async (m, { conn, usedPrefix, command, match, args }) => {
-    if(!args[0]) throw 'ارسل الامر متبوع بالسؤال الذي تريدني ان اجيب عليه'
+   let q = m.quoted ? m.quoted : m;
+  if (!/text/.test(q.text)) return m.reply("*sift code*")
     await m.reply('جاري الاجابة...')
-    let res = await fetch(`https://vihangayt.me/tools/chatgpt?q=${text}`)
+    let res = await fetch(`https://vihangayt.me/tools/chatgpt?q=${q.text.replace(usedPrefix + command, "")}`)
     let open = await res.json()
     let ai = await open.data
     await m.reply(ai)
