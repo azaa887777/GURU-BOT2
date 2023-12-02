@@ -1,3 +1,4 @@
+
 import {youtubedl, youtubedlv2} from '@bochilteam/scraper';
 import fetch from 'node-fetch';
 import yts from 'yt-search';
@@ -5,10 +6,11 @@ import ytdl from 'ytdl-core';
 import axios from 'axios'
 import {bestFormat, getUrlDl} from '../lib/y2dl.js';
 const handler = async (m, {text, conn, args, usedPrefix, command}) => {
+
   if (!args[0]) throw '*link?*';  
   let enviando;
   if (enviando) return  
-      enviando = true      
+  enviando = true      
   let youtubeLink = '';
   if (args[0].includes('you')) {
     youtubeLink = args[0];
@@ -42,17 +44,12 @@ const handler = async (m, {text, conn, args, usedPrefix, command}) => {
     const fileSizeInKB = fileSizeInBytes / 1024;
     const fileSizeInMB = fileSizeInKB / 1024;
     const roundedFileSizeInMB = fileSizeInMB.toFixed(2);
-   if (fileSizeInMB > 50) {
-    await conn.sendMessage(m.chat, {document: buff, caption: `*▢ Titulo:* ${ttl_1}\n*▢ Peso Del Audio:* ${roundedFileSizeInMB} MB`, fileName: ttl_1 + '.mp3', mimetype: 'audio/mpeg'}, {quoted: m});
-    await conn.sendMessage(m.chat, {text: `*[ ✔ ] Audio descargado y enviado exitosamente.*\n\n*—◉ Se envío en formato de documento debido a que el audio pesa ${roundedFileSizeInMB} MB y supera el limite establecido por WhatsApp.*\n*◉ Titulo:* ${ttl_1}`, edit: key}, {quoted: m});
-    enviando = false
-   } else {
-    await conn.sendMessage(m.chat, {audio: buff, caption: `*▢ Titulo:* ${ttl_1}\n*▢ Peso Del Audio:* ${roundedFileSizeInMB} MB`, fileName: ttl_1 + '.mp3', mimetype: 'audio/mpeg'}, {quoted: m});
-    await conn.sendMessage(m.chat, {text: `*[ ✔ ] DONE.*`, edit: key}, {quoted: m});
-    enviando = false   
-   }    
+      await conn.sendMessage(m.chat, {document: buff, caption: `*▢ Title:* ${ttl_1}\n*▢ size:* ${roundedFileSizeInMB} MB`, fileName: ttl_1 + '.mp3', mimetype: 'audio/mpeg'}, {quoted: m});
+    await conn.sendMessage(m.chat, {text: '*[ ✔ ] DONE.*', edit: key}, {quoted: m});
+      enviando = false    
   } catch {
     console.log('noooooo')
+
   try {
     const q = 'highest';
     const v = youtubeLink;
@@ -67,7 +64,7 @@ const handler = async (m, {text, conn, args, usedPrefix, command}) => {
       const lolhuman = await fetch(`https://api.lolhuman.xyz/api/ytaudio2?apikey=${lolkeysapi}&url=${youtubeLink}`);
       const lolh = await lolhuman.json();
       const n = lolh.result.title || 'error';
-      await conn.sendMessage(m.chat, {audio: {url: lolh.result.link}, fileName: `${n}.mp3`, mimetype: 'audio/mpeg'}, {quoted: m});
+      await conn.sendMessage(m.chat, {document: {url: lolh.result.link}, fileName: `${n}.mp3`, mimetype: 'audio/mpeg'}, {quoted: m});
       await conn.sendMessage(m.chat, {text: '*[ ✔ ] DONE.*', edit: key}, {quoted: m});
     } catch {
       try {
@@ -75,7 +72,7 @@ const handler = async (m, {text, conn, args, usedPrefix, command}) => {
         const __res = searchh.all.map((v) => v).filter((v) => v.type == 'video');
         const infoo = await ytdl.getInfo('https://youtu.be/' + __res[0].videoId);
         const ress = await ytdl.chooseFormat(infoo.formats, {filter: 'audioonly'});
-        conn.sendMessage(m.chat, {audio: {url: ress.url}, fileName: __res[0].title + '.mp3', mimetype: 'audio/mpeg'}, {quoted: m});
+        conn.sendMessage(m.chat, {document: {url: ress.url}, fileName: __res[0].title + '.mp3', mimetype: 'audio/mpeg'}, {quoted: m});
         await conn.sendMessage(m.chat, {text: '*[ ✔ ] DONE.*', edit: key}, {quoted: m});
       } catch {
         await conn.sendMessage(m.chat, {text: `*[ ❌ ] ERROR.*`, edit: key}, {quoted: m});
