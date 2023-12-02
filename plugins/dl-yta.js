@@ -54,7 +54,7 @@ const handler = async (m, {text, conn, args, usedPrefix, command}) => {
   } catch {
     console.log('noooooo')
   try {
-    const q = '128kbps';
+    const q = 'highest';
     const v = youtubeLink;
     const yt = await youtubedl(v).catch(async (_) => await youtubedlv2(v));
     const dl_url = await yt.audio[q].download();
