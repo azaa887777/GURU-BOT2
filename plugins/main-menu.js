@@ -12,22 +12,23 @@ import {
  import os from "os"
  import fs from "fs"
  import fetch from "node-fetch"
- 
+
  const defaultMenu = {
   before: `
- ♕︎𝙷𝙸 %name ❀!!
------᪥ᴍᴏʜᴄɪɴᴇʙᴏᴛ᪥-----
-ᴠᴇʀsɪᴏɴ:2.0.0
--👑ɢʀᴏᴜᴘ ᴡʜᴀᴛsᴀᴘᴘ ᴏғғɪᴄɪᴀʟ👑-
-https://chat.whatsapp.com/FQo0sqzNGBY44OdY7A5ty5
--⭕ɪɴsᴛᴀɢʀᴀᴍ ᴏғ ᴛʜᴇ ᴏᴡɴᴇʀ⭕-
+--✦𝙼𝙾𝙷𝙲𝙸𝙽𝙴 𝚁𝙾𝙱𝙾𝚃𝙸𝙲𝚂 𝙸𝙽𝙵𝙾✦--
+ ♕︎𝙷𝙸 %name ✦!!
+『ᴠᴇʀsɪᴏɴ ʙᴇᴛᴀ』
+${ucapan()}
+-👑ɢʀᴏᴜᴘ ᴡʜᴀᴛsᴀᴘᴘ👑-
+- https://chat.whatsapp.com/KTa9hOJeYpV4SRYSFxFZrV
+-⭕𝙾𝚆𝙽𝙴𝚁'𝚂 𝙸𝙽𝚂𝚃𝙰𝙶𝚃𝙰𝙼⭕-
 -www.instagram.com/mh7__x
 ┏━━━━━━━━━━━━━━┓
 ‎☆------ᴅᴏᴡɴʟᴏᴀᴅᴇʀ-----☆
 ┗━━━━━━━━━━━━━━┛
 ┏━━━━━━━━━━━━━━┓
-┃𖦹.ɪɢ2[ɪɴsᴛᴀɢʀᴀᴍ]
-┃𖦹.ғʙ[ғᴀᴄᴇʙᴏᴏᴋ]
+┃𖦹.ɪɢ[ɪɴsᴛᴀɢʀᴀᴍ ʀᴇᴇʟ]
+┃𖦹.ғʙ[ғᴀᴄᴇʙᴏᴏᴋ ᴠɪᴅᴇᴏ]
 ┃𖦹.ᴍᴇᴅᴀғɪʀᴇ[ᴍᴇᴅɪᴀғɪʀᴇ]
 ┃𖦹.𝚈𝚃𝙼𝙿3[𝚈𝚃 𝙰𝚄𝙳]
 ┃𖦹.𝚈𝚃𝙼𝙿4[𝚈𝚃 𝚅𝙸𝙳]
@@ -36,9 +37,9 @@ https://chat.whatsapp.com/FQo0sqzNGBY44OdY7A5ty5
 ┃𖦹.𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃[𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃]
 ┃𖦹.𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃2[𝚂𝙴𝚁𝚅𝙴𝚁2]
 ┃𖦹.𝚃𝚆𝙸𝚃𝚃𝙴𝚁[𝚃𝚆𝙸𝚃𝚃𝙴𝚁]
-┃𖦹.𝚃𝙸𝙺𝚃𝙾𝙺[𝚃𝙸𝙺𝚃𝙾𝙺 ]
+┃𖦹.𝚃𝙸𝙺𝚃𝙾𝙺[𝚃𝙸𝙺𝚃𝙾𝙺 𝚅𝙳 ]
 ┃𖦹.𝙸𝙼𝙰𝙶𝙴𝙽[𝙶𝙾𝙾𝙶𝙻𝙴_ɪᴍɢ]
-┃𖦹.𝙰𝙿𝙺[𝙰𝙿𝚃𝙾𝙸𝙳𝙴]
+┃𖦹.𝙼𝙾𝙳𝙰𝙿𝙺[𝙰𝙿𝙿𝙻𝙸𝙲𝙰𝚃𝙸𝙾𝙽]
 ┃𖦹.𝙶𝙳𝚁𝙸𝚅𝙴[𝙶𝙾𝙾𝙶𝙻𝙴𝙳𝚁𝙸𝚅𝙴]
 ┗━━━━━━━━━━━━┛
 ┏━━━━━━━━━━━━┓
@@ -46,17 +47,16 @@ https://chat.whatsapp.com/FQo0sqzNGBY44OdY7A5ty5
 ┗━━━━━━━━━━━━┛
 ┃☁︎.𝚈𝚃𝚂[𝚈𝚃 𝚂𝙴𝙰𝚁𝙲ʜ]
 ┃☁︎.𝙶𝙾𝙾𝙶𝙻𝙴[𝙶𝙾𝙾𝙶𝙻𝙴]
-┃☁︎.𝚂𝚂[𝚂𝙲𝚁𝙴𝙴𝙽𝚂𝙷𝙾𝚃(ᴜʀʟ)]
 ┃☁︎.𝚆𝙸𝙺𝙸[𝚆𝙸𝙺𝙸𝙿𝙴𝙳𝙸𝙰]
-┃☁︎.𝙳𝙸𝚁𝙻𝙸𝙰[𝙸𝙰𝙸𝙼𝙶𝙼𝙰𝙺𝙴𝚁]
+┃☁︎.𝙳𝙰𝙻𝙻𝙴[𝙸𝙰𝙸𝙼𝙶𝙼𝙰𝙺𝙴𝚁]
 ┃☁︎.𝙻𝚈𝚁𝙸𝙲𝚂[𝙼𝚄𝚂𝙸𝙲 𝙻𝚈𝚁𝙲]
+┃☁︎.𝙰𝙸[𝙲𝙷𝙰𝚃𝙶𝙿𝚃 𝙴𝙽𝙶𝙸𝙽𝙴]
 ┗━━━━━━━━━━━━┛
 ┏━━━━━━━━━━━━┓
 ‎☆------sᴛɪᴋᴄᴇʀs------☆
 ┗━━━━━━━━━━━━┛
 ┃✿︎.𝚂𝚃𝙸𝙲𝙺𝙴𝚁[𝙼𝙰𝙺𝙴𝚁]
 ┃✿︎.𝚆𝙼[𝚁𝙸𝙶𝙷𝚃𝚂]
-┃✿︎.𝚁𝙴𝙼𝙾𝚅𝙴𝙱𝙶[𝙱𝙰𝙲𝙺𝙶𝚁𝙾𝚄𝙽𝙳]
 ┗━━━━━━━━━━━━━┛
 ┏━━━━━━━━━━━━━┓
 ‎☆------ᴄᴏɴᴠᴇʀᴛᴇʀ----☆
@@ -80,15 +80,15 @@ https://chat.whatsapp.com/FQo0sqzNGBY44OdY7A5ty5
  }) => {
   await conn.sendMessage(m.chat, {
    react: {
- text: "⏳",
+ text: "🫶🏻",
  key: m.key,
    }
   })
-  
+
   let tags = {}
-  
+
   try {
-  
+
    /* Info Menu */
    let glb = global.db.data.users
    let usrs = glb[m.sender]
@@ -113,10 +113,10 @@ https://chat.whatsapp.com/FQo0sqzNGBY44OdY7A5ty5
    let premium = glb[m.sender].premiumTime
    let prems = `${premium > 0 ? "Premium": "Free"}`
    let platform = os.platform()
- 
- 
+
+
    let ucpn = `${ucapan()}`
-  
+
    let _uptime = process.uptime() * 1000
    let _muptime
    if (process.send) {
@@ -128,8 +128,8 @@ https://chat.whatsapp.com/FQo0sqzNGBY44OdY7A5ty5
    }
    let muptime = clockString(_muptime)
    let uptime = clockString(_uptime)
- 
-   
+
+
    let totalfeatures = Object.values(global.plugins).filter((v) => v.help && v.tags).length;
    let totalreg = Object.keys(glb).length
    let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(plugin => {
@@ -204,10 +204,10 @@ https://chat.whatsapp.com/FQo0sqzNGBY44OdY7A5ty5
    }
    text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, "g"), (_, name) => "" + replace[name])
    const pp = './Assets/Gurulogo.jpg'
-  
- 
+
+
  let contact = { key: { fromMe: false, participant: `${m.sender.split`@`[0]}@s.whatsapp.net`, ...(m.chat ? { remoteJid: '16504228206@s.whatsapp.net' } : {}) }, message: { contactMessage: { displayName: `${name}`, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${name}\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}}
- 
+
   conn.sendMessage(m.chat, { video: { url: menuvid }, caption: text.trim(),  gifPlayback: true,
   gifAttribution: 0}, { quoted: contact })
 
@@ -217,26 +217,26 @@ https://chat.whatsapp.com/FQo0sqzNGBY44OdY7A5ty5
   }
  }
  handler.command = /^(menu|help|\?)$/i
- 
 
- 
+
+
  export default handler
- 
- 
+
+
  function pickRandom(list) {
   return list[Math.floor(Math.random() * list.length)]
  }
- 
+
  const more = String.fromCharCode(8206)
  const readMore = more.repeat(4001)
- 
+
  function clockString(ms) {
   let h = isNaN(ms) ? "--" : Math.floor(ms / 3600000)
   let m = isNaN(ms) ? "--" : Math.floor(ms / 60000) % 60
   let s = isNaN(ms) ? "--" : Math.floor(ms / 1000) % 60
   return [h, " H ", m, " M ", s, " S "].map(v => v.toString().padStart(2, 0)).join("")
  }
- 
+
  function clockStringP(ms) {
   let ye = isNaN(ms) ? "--" : Math.floor(ms / 31104000000) % 10
   let mo = isNaN(ms) ? "--" : Math.floor(ms / 2592000000) % 12
@@ -246,21 +246,21 @@ https://chat.whatsapp.com/FQo0sqzNGBY44OdY7A5ty5
   let s = isNaN(ms) ? "--" : Math.floor(ms / 1000) % 60
   return [ye, " *Years 🗓️*\n", mo, " *Month 🌙*\n", d, " *Days ☀️*\n", h, " *Hours 🕐*\n", m, " *Minute ⏰*\n", s, " *Second ⏱️*"].map(v => v.toString().padStart(2, 0)).join("")
  }
- 
+
  function ucapan() {
-  const time = moment.tz("Asia/Kolkata").format("HH")
-  let res = "Good morning ☀️"
+  const time = moment.tz("Africa/Casablanca").format("HH")
+  let res = "𝙶𝙾𝙾𝙳 𝙼𝙾𝙾𝚁𝙽𝙸𝙽𝙶 ☀️"
   if (time >= 4) {
-   res = "Good Morning 🌄"
+   res = "𝙶𝙾𝙾𝙳 𝙼𝙾𝙾𝚁𝙽𝙸𝙽𝙶🌄"
   }
   if (time >= 10) {
-   res = "Good Afternoon ☀️"
+   res = "𝙶𝙾𝙾𝙳 𝙼𝙾𝙾𝚁𝙽𝙸𝙽𝙶☀️"
   }
   if (time >= 15) {
-   res = "Good Afternoon 🌇"
+   res = "𝙶𝙾𝙾𝙳 𝙰𝙵𝚃𝙴𝚁𝙽𝙾𝙾𝙽 🌇"
   }
   if (time >= 18) {
-   res = "Good Night 🌙"
+   res = "𝙶𝙾𝙾𝙳 𝙽𝙸𝙶𝙷𝚃 🌙"
   }
   return res
  }
